@@ -2,6 +2,10 @@ package com.mahmoudmabrok.toasty;
 
 import android.content.Context;
 import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class Toasty {
@@ -13,6 +17,7 @@ public class Toasty {
             toast.cancel();
         }
         toast = Toast.makeText(context, message, Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.NO_GRAVITY, 0, 0);
         toast.show();
     }
 
@@ -34,5 +39,41 @@ public class Toasty {
         toast.show();
     }
 
+    public static Toast success(Context context, String message) {
+        return makeText(context, message, R.drawable.ic_ok);
+    }
+
+    public static Toast error(Context context, String message) {
+        return makeText(context, message, R.drawable.ic_error);
+    }
+
+    public static Toast fullMessage(Context context, String message, int drawble) {
+        return makeText(context, message, drawble);
+    }
+
+
+    private static Toast makeText(Context context, String message, int drawableId) {
+        View view = LayoutInflater.from(context).inflate(R.layout.toast_layout, null);
+
+        Toast toast = new Toast(context);
+        toast.setView(view);
+
+        TextView textView = view.findViewById(R.id.toastMessage);
+        textView.setText(message);
+
+        textView.setCompoundDrawables(context.
+                getResources().
+                getDrawable(drawableId), null, null, null);
+        ImageView imageView = view.findViewById(R.id.imicon);
+        imageView.setImageResource(drawableId);
+        return toast;
+
+
+    }
+
+
+}
+
+class ToastBuilder {
 
 }

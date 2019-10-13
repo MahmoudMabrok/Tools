@@ -18,7 +18,7 @@ public class TestToast extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_toast);
 
-        Toasty.showMessageAtXY(this, "HI", 0, 0);
+        Toasty.showMessage(this, "HI");
 
         LinearLayout linearLayout = findViewById(R.id.root);
         linearLayout.setOnTouchListener(new View.OnTouchListener() {
@@ -29,11 +29,11 @@ public class TestToast extends AppCompatActivity {
                     float y = event.getY();
                     Toasty.showMessageAtXY(TestToast.this, "A", (int) x, (int) y);
                 }
-
-
                 return true;
             }
         });
+
+        Toasty.success(this, "HA").show();
 
     }
 }
